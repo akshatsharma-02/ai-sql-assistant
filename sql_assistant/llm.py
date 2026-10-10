@@ -1,5 +1,6 @@
 """
-Natural language to SQL with an LLM (Llama 3.3 on Groq by default).
+Natural language to SQL with an LLM served by Groq
+(default: OpenAI's open-weight gpt-oss-120b; change it with GROQ_MODEL in .env).
 
 Flow for one question:
   1. Build a prompt containing the live schema, business rules, and the question.
@@ -16,7 +17,7 @@ from dataclasses import dataclass, field
 from .db import run_select
 from .guard import UnsafeQueryError, clean_llm_output, validate_select
 
-DEFAULT_MODEL = os.getenv("GROQ_MODEL", "llama-3.3-70b-versatile")
+DEFAULT_MODEL = os.getenv("GROQ_MODEL", "openai/gpt-oss-120b")
 CANNOT_ANSWER = "CANNOT_ANSWER"
 
 # Business knowledge the schema alone can't express. Without these rules the

@@ -18,7 +18,7 @@ Business users have questions about their data but can't write SQL. Text-to-SQL 
 ## How it works
 
 ```
-Question ──▶ Prompt (live schema + business rules) ──▶ LLM (Llama 3.3 on Groq)
+Question ──▶ Prompt (live schema + business rules) ──▶ LLM (gpt-oss-120b on Groq)
                                                             │
                                                             ▼
                                        Validate SQL (single read-only SELECT?)
@@ -108,4 +108,4 @@ ai-sql-assistant/
 
 ## Tech stack
 
-Python · Streamlit · Groq API (Llama 3.3 70B) · SQLite · pandas
+Python · Streamlit · Groq API (OpenAI gpt-oss-120b; model is configurable) · SQLite · pandas
