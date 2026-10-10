@@ -1,0 +1,138 @@
+[
+ {
+  "id": 1,
+  "level": "easy",
+  "question": "How many customers are there?",
+  "gold_sql": "SELECT COUNT(*) FROM Customer"
+ },
+ {
+  "id": 2,
+  "level": "easy",
+  "question": "List all product categories.",
+  "gold_sql": "SELECT ProductCategory FROM ProductCategory"
+ },
+ {
+  "id": 3,
+  "level": "easy",
+  "question": "What is the most expensive product and its unit price?",
+  "gold_sql": "SELECT ProductName, ProductUnitPrice FROM Product ORDER BY ProductUnitPrice DESC LIMIT 1"
+ },
+ {
+  "id": 4,
+  "level": "easy",
+  "question": "How many products cost more than 50?",
+  "gold_sql": "SELECT COUNT(*) FROM Product WHERE ProductUnitPrice > 50"
+ },
+ {
+  "id": 5,
+  "level": "easy",
+  "question": "What is the average product unit price?",
+  "gold_sql": "SELECT ROUND(AVG(ProductUnitPrice), 2) FROM Product"
+ },
+ {
+  "id": 6,
+  "level": "medium",
+  "question": "How many customers are in each country? Show the country and the count.",
+  "gold_sql": "SELECT co.Country, COUNT(*) FROM Customer c JOIN Country co ON co.CountryID = c.CountryID GROUP BY co.Country"
+ },
+ {
+  "id": 7,
+  "level": "medium",
+  "question": "How many products are in each product category?",
+  "gold_sql": "SELECT pc.ProductCategory, COUNT(*) FROM Product p JOIN ProductCategory pc ON pc.ProductCategoryID = p.ProductCategoryID GROUP BY pc.ProductCategory"
+ },
+ {
+  "id": 8,
+  "level": "medium",
+  "question": "What is the total revenue across all orders?",
+  "gold_sql": "SELECT ROUND(SUM(od.QuantityOrdered * p.ProductUnitPrice), 2) FROM OrderDetail od JOIN Product p ON p.ProductID = od.ProductID"
+ },
+ {
+  "id": 9,
+  "level": "medium",
+  "question": "What are the top 5 products by total quantity ordered?",
+  "gold_sql": "SELECT p.ProductName, SUM(od.QuantityOrdered) AS q FROM OrderDetail od JOIN Product p ON p.ProductID = od.ProductID GROUP BY p.ProductName ORDER BY q DESC LIMIT 5",
+  "ordered": true
+ },
+ {
+  "id": 10,
+  "level": "medium",
+  "question": "Which countries are in the Western Europe region?",
+  "gold_sql": "SELECT co.Country FROM Country co JOIN Region r ON r.RegionID = co.RegionID WHERE r.Region = 'Western Europe'"
+ },
+ {
+  "id": 11,
+  "level": "medium",
+  "question": "What was the total revenue in 2015?",
+  "gold_sql": "SELECT ROUND(SUM(od.QuantityOrdered * p.ProductUnitPrice), 2) FROM OrderDetail od JOIN Product p ON p.ProductID = od.ProductID WHERE strftime('%Y', od.OrderDate) = '2015'"
+ },
+ {
+  "id": 12,
+  "level": "medium",
+  "question": "How many orders were placed in each year?",
+  "gold_sql": "SELECT strftime('%Y', OrderDate) AS y, COUNT(*) FROM OrderDetail GROUP BY y"
+ },
+ {
+  "id": 13,
+  "level": "hard",
+  "question": "What is the total revenue for each region, from highest to lowest?",
+  "gold_sql": "SELECT r.Region, ROUND(SUM(od.QuantityOrdered * p.ProductUnitPrice), 2) AS rev FROM OrderDetail od JOIN Product p ON p.ProductID = od.ProductID JOIN Customer c ON c.CustomerID = od.CustomerID JOIN Country co ON co.CountryID = c.CountryID JOIN Region r ON r.RegionID = co.RegionID GROUP BY r.Region ORDER BY rev DESC",
+  "ordered": true
+ },
+ {
+  "id": 14,
+  "level": "hard",
+  "question": "Who are the top 3 customers by total revenue? Show their full names and revenue.",
+  "gold_sql": "SELECT c.FirstName || ' ' || c.LastName, ROUND(SUM(od.QuantityOrdered * p.ProductUnitPrice), 2) AS rev FROM OrderDetail od JOIN Product p ON p.ProductID = od.ProductID JOIN Customer c ON c.CustomerID = od.CustomerID GROUP BY c.CustomerID ORDER BY rev DESC LIMIT 3",
+  "ordered": true
+ },
+ {
+  "id": 15,
+  "level": "hard",
+  "question": "Which product category had the highest revenue in 2014?",
+  "gold_sql": "SELECT pc.ProductCategory FROM OrderDetail od JOIN Product p ON p.ProductID = od.ProductID JOIN ProductCategory pc ON pc.ProductCategoryID = p.ProductCategoryID WHERE strftime('%Y', od.OrderDate) = '2014' GROUP BY pc.ProductCategory ORDER BY SUM(od.QuantityOrdered * p.ProductUnitPrice) DESC LIMIT 1"
+ },
+ {
+  "id": 16,
+  "level": "hard",
+  "question": "Which month had the highest total revenue? Show the month as YYYY-MM.",
+  "gold_sql": "SELECT strftime('%Y-%m', od.OrderDate) AS m FROM OrderDetail od JOIN Product p ON p.ProductID = od.ProductID GROUP BY m ORDER BY SUM(od.QuantityOrdered * p.ProductUnitPrice) DESC LIMIT 1"
+ },
+ {
+  "id": 17,
+  "level": "hard",
+  "question": "How many distinct customers bought Seafood products?",
+  "gold_sql": "SELECT COUNT(DISTINCT od.CustomerID) FROM OrderDetail od JOIN Product p ON p.ProductID = od.ProductID JOIN ProductCategory pc ON pc.ProductCategoryID = p.ProductCategoryID WHERE pc.ProductCategory = 'Seafood'"
+ },
+ {
+  "id": 18,
+  "level": "hard",
+  "question": "What is the average revenue per order line for customers in Germany?",
+  "gold_sql": "SELECT ROUND(AVG(od.QuantityOrdered * p.ProductUnitPrice), 2) FROM OrderDetail od JOIN Product p ON p.ProductID = od.ProductID JOIN Customer c ON c.CustomerID = od.CustomerID JOIN Country co ON co.CountryID = c.CountryID WHERE co.Country = 'Germany'"
+ },
+ {
+  "id": 19,
+  "level": "hard",
+  "question": "Which products have a unit price above the average product price?",
+  "gold_sql": "SELECT ProductName FROM Product WHERE ProductUnitPrice > (SELECT AVG(ProductUnitPrice) FROM Product)"
+ },
+ {
+  "id": 20,
+  "level": "hard",
+  "question": "What was total revenue by year? Show the year and revenue in chronological order.",
+  "gold_sql": "SELECT strftime('%Y', od.OrderDate) AS y, ROUND(SUM(od.QuantityOrdered * p.ProductUnitPrice), 2) FROM OrderDetail od JOIN Product p ON p.ProductID = od.ProductID GROUP BY y ORDER BY y",
+  "ordered": true
+ },
+ {
+  "id": 21,
+  "level": "unanswerable",
+  "question": "What is the shipping cost for each order?",
+  "gold_sql": "CANNOT_ANSWER"
+ },
+ {
+  "id": 22,
+  "level": "unanswerable",
+  "question": "Which employee handled the most orders?",
+  "gold_sql": "CANNOT_ANSWER"
+ }
+]
