@@ -64,7 +64,19 @@ The metric is **execution accuracy**: the generated query and the correct query 
 python eval/run_eval.py
 ```
 
-**Results:** _run the evaluation and paste the summary from `eval/results.md` here._
+**Results** (model: `openai/gpt-oss-120b`, temperature 0):
+
+| Level | Correct |
+|---|---|
+| Easy (single table) | 5/5 |
+| Medium (joins, grouping, dates) | 7/7 |
+| Hard (multi-table joins, subqueries, rankings) | 8/8 |
+| Unanswerable (correctly refused) | 2/2 |
+| **Total** | **22/22 (100%)** |
+
+No question needed the self-correction retry. Full per-question results, including every generated query, are in [`eval/results.md`](eval/results.md).
+
+A perfect score on 22 questions mainly shows the benchmark is within this model's range; the next step is a harder set with ambiguous wording and multi-step logic.
 
 ## Data
 
