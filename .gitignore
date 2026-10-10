@@ -1,0 +1,13 @@
+# Secrets: never commit these
+.env
+.streamlit/secrets.toml
+
+# Python and notebook clutter
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+.venv/
+venv/
+
+# OS files
+.DS_Store
