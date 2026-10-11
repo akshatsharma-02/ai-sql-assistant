@@ -2,9 +2,9 @@
 
 Ask questions about a sales database in plain English. An LLM writes the SQL, the app checks that it is safe, runs it on a read-only database, and shows the answer as a table and chart. If the generated SQL fails, the model sees the error and corrects itself.
 
-**🔗 Live demo:** _add your Streamlit Cloud link here_
+**🔗 Live demo:** [https://akshat-ai-sql-assistant.streamlit.app/]
 
-<!-- Add a screenshot: screenshots/demo.png -->
+![Demo: asking a question in plain English, then a DELETE being blocked](screenshots/demo.gif)
 
 ---
 
